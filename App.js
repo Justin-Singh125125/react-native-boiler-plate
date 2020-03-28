@@ -1,19 +1,31 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>This is a test</Text>
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+//screens
+import IndexScreen from "./src/screens/index";
+
+const navigator = createStackNavigator(
+  {
+    Index: IndexScreen
+  },
+  {
+
+    initialRouteName: 'Index',
+    defaultNavigationOptions: {
+      title: false,
+      headerTransparent: true
+    },
   }
-});
+);
+
+const App = createAppContainer(navigator);
+
+export default () => {
+  return (
+    <App />
+  );
+};
+
