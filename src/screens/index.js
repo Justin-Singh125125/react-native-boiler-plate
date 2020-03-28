@@ -10,13 +10,10 @@ import {
 //allows for us to put content below the header when transparent, since the header is being floated
 import { useHeaderHeight } from 'react-navigation-stack';
 
-
-
 const IndexScreen = props => {
 
     //get the height of the header
     const headerHeight = useHeaderHeight();
-
     return (
 
         //give main view content margin top of the header
@@ -32,7 +29,5 @@ const styles = StyleSheet.create({
         flex: 1,
     }
 });
-
-
 
 export default IndexScreen;

@@ -7,6 +7,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 //screens
 import IndexScreen from "./src/screens/index";
 
+//context
+import { Provider as AuthProvider } from "./src/context/AuthContext";
+
 const navigator = createStackNavigator(
   {
     Index: IndexScreen
@@ -25,7 +28,9 @@ const App = createAppContainer(navigator);
 
 export default () => {
   return (
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   );
 };
 
