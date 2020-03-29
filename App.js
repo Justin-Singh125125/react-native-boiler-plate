@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from "react-navigation-tabs";
+
+
+//icons
+import { Feather, MaterialIcons } from "@expo/vector-icons";
+
+//fonts
+import * as Font from "expo-font";
+import { AppLoading } from "expo";
+
 
 //screens
 import IndexScreen from "./src/screens/Search/index";
@@ -12,13 +21,6 @@ import SavedScreen from "./src/screens/Saved/Saved";
 import FollowersScreen from "./src/screens/Followers/Followers";
 
 import ProfileScreen from "./src/screens/Profile/Profile";
-
-
-//icons
-import { Feather, MaterialIcons } from "@expo/vector-icons";
-
-
-
 
 //context
 import { Provider as AuthProvider } from "./src/context/AuthContext";
@@ -54,7 +56,7 @@ const tabNavigator = createBottomTabNavigator({
       initialRouteName: 'Saved',
       defaultNavigationOptions: defaultNavigationSettings,
       navigationOptions: {
-        tabBarLabel: 'Search',
+        tabBarLabel: 'Saved',
         tabBarIcon: ({ tintColor }) => (
           <MaterialIcons name="favorite-border" color={tintColor} size={25} />
         )
@@ -68,7 +70,7 @@ const tabNavigator = createBottomTabNavigator({
       initialRouteName: 'Followers',
       defaultNavigationOptions: defaultNavigationSettings,
       navigationOptions: {
-        tabBarLabel: 'Search',
+        tabBarLabel: 'Following',
         tabBarIcon: ({ tintColor }) => (
           <Feather name="link-2" color={tintColor} size={25} />
         )
@@ -82,7 +84,7 @@ const tabNavigator = createBottomTabNavigator({
       initialRouteName: 'Profile',
       defaultNavigationOptions: defaultNavigationSettings,
       navigationOptions: {
-        tabBarLabel: 'Search',
+        tabBarLabel: 'Profile',
         tabBarIcon: ({ tintColor }) => (
           <Feather name="user" color={tintColor} size={25} />
         )
@@ -98,13 +100,30 @@ const tabNavigator = createBottomTabNavigator({
   });
 
 
+const getFonts = () => {
+  return Font.loadAsync({
+    "Roboto-Regular": require("./src/fonts/Roboto-Regular.ttf"),
+    "Roboto-Medium": require("./src/fonts/Roboto-Medium.ttf"),
+    "Roboto-Bold": require("./src/fonts/Roboto-Bold.ttf")
+  })
+}
+
 const App = createAppContainer(tabNavigator);
 
 export default () => {
-  return (
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  );
+
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  if (fontsLoaded) {
+    return (
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    );
+  } else {
+    return <AppLoading startAsync={getFonts} onFinish={() => setFontsLoaded(true)} />
+  }
+
+
 };
 
