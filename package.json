@@ -20,7 +20,8 @@
     "react-native-unimodules": "^0.8.1",
     "react-native-web": "^0.12.2",
     "react-navigation": "^4.3.4",
-    "react-navigation-stack": "^2.3.8"
+    "react-navigation-stack": "^2.3.8",
+    "react-navigation-tabs": "^2.8.9"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
