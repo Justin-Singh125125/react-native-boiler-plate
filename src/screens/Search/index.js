@@ -5,14 +5,18 @@ import {
     StyleSheet,
 } from 'react-native';
 
+//components
+import MainHeader from "../../components/MainHeader";
+import RestaurantCard from "../../components/RestaurantCard";
+
 const SearchScreen = props => {
 
     return (
 
         //give main view content margin top of the header
         <View style={styles.container}>
-            <Text style={styles.text}>Deals Near You</Text>
-
+            <MainHeader title="Deals Near You" />
+            <RestaurantCard />
         </View >
     );
 };
@@ -24,8 +28,6 @@ const styles = StyleSheet.create({
         // we give view margin top because that is how
         //big the transparent header is
         marginTop: 88,
-        padding: 10,
-
     },
     text: {
         fontFamily: "Roboto-Medium",
